@@ -19,7 +19,7 @@ document.body.appendChild(renderer.domElement);
 // 物体
 var geometry = new THREE.BoxGeometry(1, 1, 1);
 var material = new THREE.MeshLambertMaterial({
-  color: 0x00ff00,
+  color: 0x00ff,
 });
 var cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
