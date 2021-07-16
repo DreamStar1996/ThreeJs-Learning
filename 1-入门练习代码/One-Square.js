@@ -1,80 +1,52 @@
-//场景-----------------------
+// 场景
 var scene = new THREE.Scene();
-//	 --------------------------
 
-// 摄像机---------------------
+// 摄像机
 var camera = new THREE.PerspectiveCamera(
-  45,
+  75,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
-camera.position.x = -30;
-camera.position.y = 40;
-camera.position.z = 30;
-camera.lookAt(scene.position);
-// --------------------------
+camera.position.z = 5;
 
-// 渲染器--------------------
+// 渲染器
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
+// 渲染器 end
 
-// 设置渲染器渲染阴影效果
-renderer.setClearColor(new THREE.Color(0x000000));
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.shadowMap.enabled = true;
-// 渲染器 end----------------
-
-// 坐标轴--------------------
-var axes = new THREE.AxesHelper(20);
-scene.add(axes);
-// -------------------------
-
-// 平面---------------------
-var planeGeometry = new THREE.PlaneGeometry(60, 20, 1, 1);
-var planeMaterial = new THREE.MeshLambertMaterial({
-  color: 0xcccccc,
-});
-var plane = new THREE.Mesh(planeGeometry, planeMaterial);
-plane.rotation.x = -0.5 * Math.PI;
-plane.position.x = 15;
-plane.position.y = 0;
-plane.position.z = 0;
-scene.add(plane);
-
-// 设置投影
-plane.receiveShadow = true;
-// --------------------------
-
-// 物体----------------------
-var geometry = new THREE.BoxGeometry(4, 4, 4);
+// 物体
+var geometry = new THREE.BoxGeometry(1, 1, 1);
 var material = new THREE.MeshLambertMaterial({
   color: 0x00ff00,
 });
 var cube = new THREE.Mesh(geometry, material);
-cube.position.x = 0;
-cube.position.y = 2;
-cube.position.z = 0;
-
-// 设置投影
-cube.castShadow = true;
 scene.add(cube);
-// 物体 end ------------------
+// 物体 end
 
-// 光源-----------------------
+//增加渲染代码,源渲染代码
+//renderer.render(scene, camera);
+//动态渲染，相机移动
+function animate() {
+  cube.rotation.x += 0.01;
+  cube.rotation.y += 0.01;
+  renderer.render(scene, camera);
+  requestAnimationFrame(animate);
+}
+animate();
+
+// 光源
 var spotLight = new THREE.SpotLight(0xffffff);
 spotLight.position.set(-40, 60, -10);
 scene.add(spotLight);
+// 光源 end
 
-// 设置投影
+//渲染阴影效果
+renderer.setClearColor(new THREE.Color(0x000000, 1.0));
+renderer.shadowMap.enabled = true;
+//立方体阴影
+cube.castShadow = true;
+//地面阴影
+AnimationPlaybackEvent.receiveShadow = true;
 spotLight.castShadow = true;
-// 光源 end -------------------
-
-// 状态监视器-------------------
-var stats = new Stats();
-stats.showPanel(0);
-document.body.appendChild(stats.dom);
-// 状态监视器 end --------------
-
-renderer.render(scene, camera);
