@@ -20,7 +20,9 @@
         // 圆柱网格模型
         var geometry3 = new THREE.CylinderGeometry(50, 50, 100, 25);
         var material3 = new THREE.MeshLambertMaterial({
-            color: 0x00FA9A
+            color: 0x00FA9A,
+            specular: 0x4488ee,
+            shininess: 12
         });
         var mesh3 = new THREE.Mesh(geometry3, material3); //网格模型对象Mesh
         // mesh3.translateX(120); //球体网格模型沿Y轴正方向平移120
