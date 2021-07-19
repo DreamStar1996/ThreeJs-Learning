@@ -8,7 +8,10 @@
         //var geometry = new THREE.SphereGeometry(60, 40, 40); //创建一个球体几何对象
         var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
         var material = new THREE.MeshLambertMaterial({
-            color: 0x0000ff
+            // color: 0x0000ff
+            color: 0xff0000,
+            opacity: 0.9, //透明度
+            transparent: true
         }); //材质对象Material
         var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
         mesh.position.set(-50, 40, 80); //设置mesh3模型对象的xyz坐标为120,0,0
@@ -17,7 +20,7 @@
         // 圆柱网格模型
         var geometry3 = new THREE.CylinderGeometry(50, 50, 100, 25);
         var material3 = new THREE.MeshLambertMaterial({
-            color: 0xffff00
+            color: 0x00FA9A
         });
         var mesh3 = new THREE.Mesh(geometry3, material3); //网格模型对象Mesh
         // mesh3.translateX(120); //球体网格模型沿Y轴正方向平移120
