@@ -5,6 +5,28 @@ var scene = new THREE.Scene();
 /**
  * 创建网格模型
  */
+var geometry = new THREE.BoxGeometry(100, 100, 100); //创建一个立方体几何对象Geometry
+// 遍历几何体的face属性
+geometry.faces.forEach(face => {
+    // 设置三角面face三个顶点的颜色
+    face.vertexColors = [
+        new THREE.Color(0xffff00),
+        new THREE.Color(0xff00ff),
+        new THREE.Color(0x00ffff),
+    ]
+});
+// // pop()：删除数组的最后一个元素   shift：删除数组的第一个元素
+// geometry.faces.pop();
+// geometry.faces.pop();
+// geometry.faces.shift();
+// geometry.faces.shift();
+var material = new THREE.MeshBasicMaterial({
+    //color: 0x0000ff,
+    vertexColors: THREE.FaceColors,
+    // wireframe:true,//线框模式渲染
+}); //材质对象Material
+var mesh = new THREE.Mesh(geometry, material); //网格模型对象Mesh
+scene.add(mesh); //点对象添加到场景中
 
 /**
  * 光源设置
