@@ -47,3 +47,23 @@
     document.body.appendChild(renderer.domElement); //body元素中插入canvas对象
     //执行渲染操作   指定场景、相机作为参数
     renderer.render(scene, camera);
+
+    let refractorGeometry = new THREE.PlaneBufferGeometry(1000, 1000);
+    let refractor = new Refractor(refractorGeometry, {
+        color: 0x999999,
+        textureWidth: 1024,
+        textureHeight: 1024,
+        shader: WaterRefractionShader
+    });
+    refractor.position.set(0, 0, 5);
+    this.scene.add(refractor);
+    let d = new THREE.PlaneBufferGeometry(1000, 1000);
+    let c = new Refractor(d, {
+        color: 0x999999,
+        textureWidth: 1024,
+        textureHeight: 1024,
+        shader: WaterRefractionShader
+    });
+    c.position.set(0, 0, -5);
+    c.rotation.y = -Math.PI;
+    this.scene.add(c);
